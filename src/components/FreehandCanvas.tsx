@@ -19,7 +19,8 @@ const CANVAS_W = 1000;
 const CANVAS_H = 1400;
 
 const PEN_SIZES = [2, 4, 8];
-const INK_COLORS = ["#1f2d24", "#1d4ed8", "#b3541e"];
+const INK_COLORS = ["#1f2d24", "#1d4ed8", "#b3541e"] as const;
+const DEFAULT_INK: string = INK_COLORS[0];
 
 /**
  * Paper-like drawing surface. Strokes are kept in memory as vectors so undo /
@@ -42,7 +43,7 @@ export function FreehandCanvas({
   const [undone, setUndone] = useState<Stroke[]>([]);
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
   const [size, setSize] = useState(4);
-  const [color, setColor] = useState(INK_COLORS[0]);
+  const [color, setColor] = useState<string>(DEFAULT_INK);
   const [ready, setReady] = useState(false);
 
   const redraw = useCallback(() => {
@@ -76,8 +77,9 @@ export function FreehandCanvas({
       ctx.lineWidth = stroke.erase ? stroke.width * 5 : stroke.width;
       ctx.beginPath();
       stroke.points.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
-      if (stroke.points.length === 1) {
-        ctx.arc(stroke.points[0].x, stroke.points[0].y, ctx.lineWidth / 2, 0, Math.PI * 2);
+      const first = stroke.points[0];
+      if (stroke.points.length === 1 && first) {
+        ctx.arc(first.x, first.y, ctx.lineWidth / 2, 0, Math.PI * 2);
         ctx.fillStyle = ctx.strokeStyle as string;
         ctx.fill();
       }
@@ -142,6 +144,7 @@ export function FreehandCanvas({
       if (prev.length === 0) return prev;
       const next = prev.slice();
       const last = next[next.length - 1];
+      if (!last) return prev;
       next[next.length - 1] = { ...last, points: [...last.points, point] };
       return next;
     });
@@ -153,8 +156,8 @@ export function FreehandCanvas({
 
   const undo = () => {
     setStrokes((prev) => {
-      if (prev.length === 0) return prev;
       const last = prev[prev.length - 1];
+      if (!last) return prev;
       setUndone((u) => [...u, last]);
       return prev.slice(0, -1);
     });
@@ -162,8 +165,8 @@ export function FreehandCanvas({
 
   const redo = () => {
     setUndone((prev) => {
-      if (prev.length === 0) return prev;
       const last = prev[prev.length - 1];
+      if (!last) return prev;
       setStrokes((s) => [...s, last]);
       return prev.slice(0, -1);
     });

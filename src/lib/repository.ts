@@ -266,7 +266,7 @@ export async function saveCaseSection(
   const { error } = await supabase
     .from("case_sections")
     .upsert(
-      { patient_id: patientId, owner_id, section_key: sectionKey, data },
+      { patient_id: patientId, owner_id, section_key: sectionKey, data: data as never },
       { onConflict: "patient_id,section_key" },
     );
   if (error) throw error;

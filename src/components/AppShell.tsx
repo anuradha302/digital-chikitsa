@@ -58,7 +58,9 @@ export function AppShell({
               {back && (
                 <button
                   type="button"
-                  onClick={() => router.navigate({ to: back.to, params: back.params })}
+                  onClick={() =>
+                    router.navigate({ to: back.to, params: back.params ?? {} } as never)
+                  }
                   aria-label="मागे"
                   className="rounded-full bg-primary-foreground/10 p-2 transition-colors hover:bg-primary-foreground/20"
                 >

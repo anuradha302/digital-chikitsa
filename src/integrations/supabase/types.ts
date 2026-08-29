@@ -14,7 +14,239 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      case_sections: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          owner_id: string
+          patient_id: string
+          section_key: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          owner_id: string
+          patient_id: string
+          section_key: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          owner_id?: string
+          patient_id?: string
+          section_key?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_sections_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinics: {
+        Row: {
+          address: string | null
+          created_at: string
+          doctor_name: string | null
+          email: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          owner_id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          doctor_name?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          owner_id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          doctor_name?: string | null
+          email?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          owner_id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      patient_drawings: {
+        Row: {
+          created_at: string
+          id: string
+          owner_id: string
+          patient_id: string
+          storage_path: string | null
+          strokes: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          owner_id: string
+          patient_id: string
+          storage_path?: string | null
+          strokes?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          owner_id?: string
+          patient_id?: string
+          storage_path?: string | null
+          strokes?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_drawings_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patient_notes: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          owner_id: string
+          patient_id: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          owner_id: string
+          patient_id: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          patient_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_notes_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patients: {
+        Row: {
+          address: string | null
+          age: string | null
+          birth_datetime: string | null
+          birth_place: string | null
+          clinic_id: string
+          created_at: string
+          education: string | null
+          email: string | null
+          gender: string | null
+          height: string | null
+          id: string
+          mobile: string | null
+          name: string
+          occupation: string | null
+          owner_id: string
+          reference: string | null
+          reg_no: string | null
+          updated_at: string
+          visit_date: string
+          weight: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          address?: string | null
+          age?: string | null
+          birth_datetime?: string | null
+          birth_place?: string | null
+          clinic_id: string
+          created_at?: string
+          education?: string | null
+          email?: string | null
+          gender?: string | null
+          height?: string | null
+          id?: string
+          mobile?: string | null
+          name: string
+          occupation?: string | null
+          owner_id: string
+          reference?: string | null
+          reg_no?: string | null
+          updated_at?: string
+          visit_date?: string
+          weight?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          address?: string | null
+          age?: string | null
+          birth_datetime?: string | null
+          birth_place?: string | null
+          clinic_id?: string
+          created_at?: string
+          education?: string | null
+          email?: string | null
+          gender?: string | null
+          height?: string | null
+          id?: string
+          mobile?: string | null
+          name?: string
+          occupation?: string | null
+          owner_id?: string
+          reference?: string | null
+          reg_no?: string | null
+          updated_at?: string
+          visit_date?: string
+          weight?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patients_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -77,20 +77,32 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "आयुर्वेद केस पेपर — डिजिटल रुग्ण नोंदवही" },
+      {
+        name: "description",
+        content: "आयुर्वेद दवाखान्यासाठी डिजिटल आतुर निदान पत्रक व रुग्ण नोंदवही.",
+      },
+      { name: "theme-color", content: "#1f3d2b" },
+      { property: "og:title", content: "आयुर्वेद केस पेपर" },
+      {
+        property: "og:description",
+        content: "आयुर्वेद दवाखान्यासाठी डिजिटल आतुर निदान पत्रक व रुग्ण नोंदवही.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Tiro+Devanagari+Marathi&display=swap",
+      },
+      { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),

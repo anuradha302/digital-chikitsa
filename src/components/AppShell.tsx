@@ -6,13 +6,13 @@ import { useClinic } from "@/hooks/useClinic";
 import { cn } from "@/lib/utils";
 
 interface AppShellProps {
-  title?: string;
-  subtitle?: string;
-  back?: { to: string; params?: Record<string, string> };
-  actions?: ReactNode;
+  title?: string | undefined;
+  subtitle?: string | undefined;
+  back?: { to: string; params?: Record<string, string> } | undefined;
+  actions?: ReactNode | undefined;
   children: ReactNode;
   /** Show the configured clinic name in the header band. */
-  showClinic?: boolean;
+  showClinic?: boolean | undefined;
 }
 
 /**

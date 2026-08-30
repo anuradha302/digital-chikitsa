@@ -45,12 +45,12 @@ function NewPatientForm() {
 
   useEffect(() => {
     nextRegNo()
-      .then((n) => setForm((f) => (f.reg_no ? f : { ...f, reg_no: n })))
+      .then((n) => setForm((f) => (f["reg_no"] ? f : { ...f, reg_no: n })))
       .catch(() => {});
   }, []);
 
   const submit = async () => {
-    const name = String(form.name ?? "").trim();
+    const name = String(form["name"] ?? "").trim();
     if (!name) {
       toast.error("रुग्णाचे नाव आवश्यक आहे");
       return;
@@ -63,21 +63,21 @@ function NewPatientForm() {
     try {
       const patient = await createPatient(clinic.id, {
         name,
-        reg_no: (form.reg_no as string) || null,
-        visit_date: (form.visit_date as string) || todayISO(),
-        gender: (form.gender as string) || null,
-        age: (form.age as string) || null,
-        weight: (form.weight as string) || null,
-        height: (form.height as string) || null,
-        education: (form.education as string) || null,
-        occupation: (form.occupation as string) || null,
-        birth_place: (form.birth_place as string) || null,
-        birth_datetime: (form.birth_datetime as string) || null,
-        email: (form.email as string) || null,
-        address: (form.address as string) || null,
-        whatsapp: (form.whatsapp as string) || null,
-        mobile: (form.mobile as string) || null,
-        reference: (form.reference as string) || null,
+        reg_no: (form["reg_no"] as string) || null,
+        visit_date: (form["visit_date"] as string) || todayISO(),
+        gender: (form["gender"] as string) || null,
+        age: (form["age"] as string) || null,
+        weight: (form["weight"] as string) || null,
+        height: (form["height"] as string) || null,
+        education: (form["education"] as string) || null,
+        occupation: (form["occupation"] as string) || null,
+        birth_place: (form["birth_place"] as string) || null,
+        birth_datetime: (form["birth_datetime"] as string) || null,
+        email: (form["email"] as string) || null,
+        address: (form["address"] as string) || null,
+        whatsapp: (form["whatsapp"] as string) || null,
+        mobile: (form["mobile"] as string) || null,
+        reference: (form["reference"] as string) || null,
       });
       toast.success("रुग्ण नोंदवला");
       navigate({ to: "/patients/$id", params: { id: patient.id } });

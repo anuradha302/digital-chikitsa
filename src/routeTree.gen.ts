@@ -15,6 +15,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as PatientsIndexRouteImport } from './routes/patients.index'
+import { Route as PatientsIdRouteImport } from './routes/patients.$id'
 import { Route as PatientsNewRouteImport } from './routes/patients.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const PatientsIndexRoute = PatientsIndexRouteImport.update({
   path: '/patients/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PatientsIdRoute = PatientsIdRouteImport.update({
+  id: '/patients/$id',
+  path: '/patients/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PatientsNewRoute = PatientsNewRouteImport.update({
   id: '/patients/new',
   path: '/patients/new',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
+  '/patients/$id': typeof PatientsIdRoute
   '/patients/new': typeof PatientsNewRoute
   '/patients/': typeof PatientsIndexRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
+  '/patients/$id': typeof PatientsIdRoute
   '/patients/new': typeof PatientsNewRoute
   '/patients': typeof PatientsIndexRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/settings': typeof SettingsRoute
   '/setup': typeof SetupRoute
+  '/patients/$id': typeof PatientsIdRoute
   '/patients/new': typeof PatientsNewRoute
   '/patients/': typeof PatientsIndexRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/settings'
     | '/setup'
+    | '/patients/$id'
     | '/patients/new'
     | '/patients/'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/settings'
     | '/setup'
+    | '/patients/$id'
     | '/patients/new'
     | '/patients'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/settings'
     | '/setup'
+    | '/patients/$id'
     | '/patients/new'
     | '/patients/'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   SettingsRoute: typeof SettingsRoute
   SetupRoute: typeof SetupRoute
+  PatientsIdRoute: typeof PatientsIdRoute
   PatientsNewRoute: typeof PatientsNewRoute
   PatientsIndexRoute: typeof PatientsIndexRoute
 }
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PatientsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/patients/$id': {
+      id: '/patients/$id'
+      path: '/patients/$id'
+      fullPath: '/patients/$id'
+      preLoaderRoute: typeof PatientsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/patients/new': {
       id: '/patients/new'
       path: '/patients/new'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   SettingsRoute: SettingsRoute,
   SetupRoute: SetupRoute,
+  PatientsIdRoute: PatientsIdRoute,
   PatientsNewRoute: PatientsNewRoute,
   PatientsIndexRoute: PatientsIndexRoute,
 }
